@@ -25,6 +25,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[DSMC for Couette flow]]></title>
+    <url>%2F2018%2F02%2F25%2FDSMC%20for%20Couette%20flow%2F</url>
+    <content type="text"><![CDATA[DSMC Main Program to simulate planar Couette flow.]]></content>
+      <categories>
+        <category>CFD</category>
+      </categories>
+      <tags>
+        <tag>DSMC</tag>
+        <tag>planar Couette flow</tag>
+        <tag>OpenFoam</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Tutorials in Learning OpenFOAM]]></title>
     <url>%2F2018%2F02%2F24%2FTutorials%20in%20Learning%20OpenFOAM%2F</url>
     <content type="text"><![CDATA[OpenFOAM (Open Source Field Operation and Manipulation) is a framework for developing application executables that use packaged functionality contained within a collection of approximately 100 C++ libraries. OpenFOAM is shipped with approximately 250 pre-built applications that fall into two categories: solvers, that are each designed to solve a specific problem in fluid (or continuum) mechanics; and utilities, that are designed to perform tasks that involve data manipulation. The overall structure of OpenFOAM is shown in the figure below. The interface to the pre- and post-processing are themselves OpenFOAM utilities, thereby ensuring consistent data handling across all environments. Official TutorialsForums and BlogsBooksF. Moukalled, L. Mangali, The Finite Volume Method in Computational Fluid Dynamics, An Advanced Introduction with OpenFOAM and Matlab, Springer, 2015 Slides]]></content>
@@ -35,19 +48,6 @@
         <tag>C++</tag>
         <tag>OpenFOAM</tag>
         <tag>CFD</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[DSMC-Couette]]></title>
-    <url>%2F2018%2F02%2F09%2FDSMC-Couette%2F</url>
-    <content type="text"><![CDATA[DSMC Main Program to simulate planar Couette flow. 在Microsoft Visual Studio 2015编译环境下运行，]]></content>
-      <categories>
-        <category>CFD</category>
-      </categories>
-      <tags>
-        <tag>DSMC</tag>
-        <tag>planar Couette flow</tag>
-        <tag>C++</tag>
       </tags>
   </entry>
   <entry>
