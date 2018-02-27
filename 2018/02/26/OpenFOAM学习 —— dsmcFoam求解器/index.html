@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Shaundinger&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
-<meta property="og:updated_time" content="2018-02-27T20:49:02.492Z">
+<meta property="og:updated_time" content="2018-02-27T20:52:22.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenFOAM学习 —— dsmcFoam求解器">
 <meta name="twitter:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
@@ -435,7 +435,6 @@
 </li>
 </ul>
 <hr>
-<p><strong><code>Make</code></strong>包含了</p>
 <ul>
 <li><strong><code>Make</code></strong><ul>
 <li><code>files</code></li>
@@ -443,10 +442,10 @@
 </ul>
 </li>
 </ul>
-<p><code>files</code> 创建一个叫<code>DSMC</code>的动态链接库，其中包含了clouds的基类，以及parcels和submodels的派生类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/* Parcels */</span><br><span class="line">parcels/derived/dsmcParcel/dsmcParcel.C</span><br><span class="line"></span><br><span class="line">/* Cloud base classes */</span><br><span class="line">clouds/baseClasses/DSMCBaseCloud/DSMCBaseCloud.C</span><br><span class="line"></span><br><span class="line">/* Sub-models */</span><br><span class="line">parcels/derived/dsmcParcel/defineDSMCParcel.C</span><br><span class="line">parcels/derived/dsmcParcel/makeDSMCParcelBinaryCollisionModels.C</span><br><span class="line">parcels/derived/dsmcParcel/makeDSMCParcelWallInteractionModels.C</span><br><span class="line">parcels/derived/dsmcParcel/makeDSMCParcelInflowBoundaryModels.C</span><br><span class="line"></span><br><span class="line">LIB = $(FOAM_LIBBIN)/libDSMC // 动态链接库名称为 DSMC</span><br></pre></td></tr></table></figure></p>
-<p><code>options</code>包含文件头以及链接库（注意与前文提到的<code>\applications\solvers\discreteMethods\dsmc\dsmcFoam\Make</code>下的<code>options</code>里的内容对比）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">EXE_INC = \</span><br><span class="line">    -I$(LIB_SRC)/finiteVolume/lnInclude \</span><br><span class="line">    -I$(LIB_SRC)/lagrangian/basic/lnInclude \</span><br><span class="line">    -I$(LIB_SRC)/meshTools/lnInclude</span><br><span class="line"></span><br><span class="line">LIB_LIBS = \</span><br><span class="line">    -llagrangian \</span><br><span class="line">    -lfiniteVolume \</span><br><span class="line">    -lmeshTools</span><br></pre></td></tr></table></figure></p>
-<hr>
-<p><strong><code>parcels</code></strong>下包括dsmc使用的parcel模板类和继承类的声明和定义</p>
+<p><code>files</code>创建一个叫<code>DSMC</code>的动态链接库，其中包含了clouds的基类，以及parcels和submodels的派生类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/* Parcels */</span><br><span class="line">parcels/derived/dsmcParcel/dsmcParcel.C</span><br><span class="line"></span><br><span class="line">/* Cloud base classes */</span><br><span class="line">clouds/baseClasses/DSMCBaseCloud/DSMCBaseCloud.C</span><br><span class="line"></span><br><span class="line">/* Sub-models */</span><br><span class="line">parcels/derived/dsmcParcel/defineDSMCParcel.C</span><br><span class="line">parcels/derived/dsmcParcel/makeDSMCParcelBinaryCollisionModels.C</span><br><span class="line">parcels/derived/dsmcParcel/makeDSMCParcelWallInteractionModels.C</span><br><span class="line">parcels/derived/dsmcParcel/makeDSMCParcelInflowBoundaryModels.C</span><br><span class="line"></span><br><span class="line">LIB = $(FOAM_LIBBIN)/libDSMC // 动态链接库名称为 DSMC</span><br><span class="line"></span><br><span class="line">`options`包含文件头以及链接库（注意与前文提到的`\applications\solvers\discreteMethods\dsmc\dsmcFoam\Make`下的`options`里的内容对比）</span><br></pre></td></tr></table></figure></p>
+<p>EXE_INC = \<br>    -I$(LIB_SRC)/finiteVolume/lnInclude \<br>    -I$(LIB_SRC)/lagrangian/basic/lnInclude \<br>    -I$(LIB_SRC)/meshTools/lnInclude</p>
+<p>LIB_LIBS = \<br>    -llagrangian \<br>    -lfiniteVolume \<br>    -lmeshTools</p>
+<h2 id=""><a href="#" class="headerlink" title="```"></a>```</h2><p><strong><code>parcels</code></strong>下包括dsmc使用的parcel模板类和继承类的声明和定义</p>
 <ul>
 <li><strong><code>parcels</code></strong><ul>
 <li><code>derived</code><ul>
@@ -700,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先来看看顶层求解器dsmcFoam"><span class="nav-number">1.</span> <span class="nav-text">1. 先来看看顶层求解器dsmcFoam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-再来看看底层的源程序"><span class="nav-number">2.</span> <span class="nav-text">2. 再来看看底层的源程序</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先来看看顶层求解器dsmcFoam"><span class="nav-number">1.</span> <span class="nav-text">1. 先来看看顶层求解器dsmcFoam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-再来看看底层的源程序"><span class="nav-number">2.</span> <span class="nav-text">2. 再来看看底层的源程序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number"></span> <span class="nav-text">```</span></a></div>
             
 
           </div>
