@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Shaundinger&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
-<meta property="og:updated_time" content="2018-02-27T03:38:42.778Z">
+<meta property="og:updated_time" content="2018-02-27T18:25:54.238Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenFOAM学习 —— dsmcFoam求解器">
 <meta name="twitter:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
@@ -409,6 +409,58 @@
 <p>很简短的几行，基本所有的OpenFOAM求解器都要用到这两个文件。</p>
 <h3 id="2-再来看看底层的源程序"><a href="#2-再来看看底层的源程序" class="headerlink" title="2. 再来看看底层的源程序"></a>2. 再来看看底层的源程序</h3><p>这一步，我们需要弄懂dsmcFoam的底层实现，也就是<code>src</code>文件夹里的内容，包括了OpenFOAM所有类的声明和定义文件。</p>
 <p>一开始来到这里会让人感到无能为力，OpenFOAM为了维持代码的简介性，使用了大量的继承、派生和模板，而且继承层数之多令人绝望，有的时候为了查到某一个子类的成员函数的定义，要向上找五六层。这时候建议使用<a href="https://cpp.openfoam.org/v5/" target="_blank" rel="noopener">OpenFOAM C++ Source Code Guide</a>进行查找，doxygen生成的代码能够减轻迷茫。</p>
+<p>dsmc求解器的源码位于目录<code>$FOAM_SRC\lagrangian\DSMC</code>下，包括四个文件夹</p>
+<ul>
+<li><code>clouds</code><pre><code>* baseClasses
+    * DSMCBaseCloud.H
+    * DSMCBaseCloud.C
+* derived
+    * dsmcCloud.H
+* Templates
+    * DSMCCloud.H
+    * DSMCCloudI.H
+    * DSMCCloud.C
+</code></pre></li>
+<li><code>Make</code><ul>
+<li>files</li>
+<li>options</li>
+</ul>
+</li>
+<li><p><code>parcels</code></p>
+<ul>
+<li>derived<ul>
+<li>defineDSMCParcel.C</li>
+<li>dsmcParcel.C</li>
+<li>dsmcParcel.H</li>
+<li>makeDSMCParcelBinaryCollisionModels.C</li>
+<li>makeDSMCParcelInflowBoundaryModels.C</li>
+<li>makeDSMCParcelWallInteractionModels.C</li>
+</ul>
+</li>
+<li>Templates<ul>
+<li>DSMCParcel.C</li>
+<li>DSMCParcel.H</li>
+<li>DSMCParcelI.H</li>
+<li>DSMCParcelIO.C</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>submodels</code> </p>
+<ul>
+<li><p>BinaryCollisionModel</p>
+</li>
+<li><p>InflowBoundaryModel</p>
+</li>
+<li>WallInteractionModel<ul>
+<li>WallInteractionModel.C</li>
+<li>WallInteractionModel.H</li>
+<li>WallInteractionModelNew.C</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -534,7 +586,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
