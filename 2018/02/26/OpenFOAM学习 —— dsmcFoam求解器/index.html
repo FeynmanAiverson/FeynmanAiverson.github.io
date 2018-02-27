@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Shaundinger&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
-<meta property="og:updated_time" content="2018-02-27T18:25:54.238Z">
+<meta property="og:updated_time" content="2018-02-27T18:34:02.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenFOAM学习 —— dsmcFoam求解器">
 <meta name="twitter:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
@@ -411,16 +411,24 @@
 <p>一开始来到这里会让人感到无能为力，OpenFOAM为了维持代码的简介性，使用了大量的继承、派生和模板，而且继承层数之多令人绝望，有的时候为了查到某一个子类的成员函数的定义，要向上找五六层。这时候建议使用<a href="https://cpp.openfoam.org/v5/" target="_blank" rel="noopener">OpenFOAM C++ Source Code Guide</a>进行查找，doxygen生成的代码能够减轻迷茫。</p>
 <p>dsmc求解器的源码位于目录<code>$FOAM_SRC\lagrangian\DSMC</code>下，包括四个文件夹</p>
 <ul>
-<li><code>clouds</code><pre><code>* baseClasses
-    * DSMCBaseCloud.H
-    * DSMCBaseCloud.C
-* derived
-    * dsmcCloud.H
-* Templates
-    * DSMCCloud.H
-    * DSMCCloudI.H
-    * DSMCCloud.C
-</code></pre></li>
+<li><code>clouds</code><ul>
+<li><code>baseClasses</code><ul>
+<li>DSMCBaseCloud.H</li>
+<li>DSMCBaseCloud.C</li>
+</ul>
+</li>
+<li><code>derived</code><ul>
+<li>dsmcCloud.H</li>
+</ul>
+</li>
+<li><code>Templates</code><ul>
+<li>DSMCCloud.H</li>
+<li>DSMCCloudI.H</li>
+<li>DSMCCloud.C</li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>Make</code><ul>
 <li>files</li>
 <li>options</li>
@@ -428,7 +436,7 @@
 </li>
 <li><p><code>parcels</code></p>
 <ul>
-<li>derived<ul>
+<li><code>derived</code><ul>
 <li>defineDSMCParcel.C</li>
 <li>dsmcParcel.C</li>
 <li>dsmcParcel.H</li>
@@ -437,7 +445,7 @@
 <li>makeDSMCParcelWallInteractionModels.C</li>
 </ul>
 </li>
-<li>Templates<ul>
+<li><code>Templates</code><ul>
 <li>DSMCParcel.C</li>
 <li>DSMCParcel.H</li>
 <li>DSMCParcelI.H</li>
@@ -448,14 +456,38 @@
 </li>
 <li><p><code>submodels</code> </p>
 <ul>
-<li><p>BinaryCollisionModel</p>
+<li><code>BinaryCollisionModel</code>  <ul>
+<li>BinaryCollisionModel.H</li>
+<li>BinaryCollisionModel.C</li>
+<li>BinaryCollisionModelNew.C</li>
+<li>VariableHardSphere.H</li>
+<li>VariableHardSphere.C </li>
+<li>LarsenBorgnakkeVariableHardSphere.H</li>
+<li>LarsenBorgnakkeVariableHardSphere.C </li>
+<li>NoBinaryCollision.H</li>
+<li>NoBinaryCollision.C     </li>
+</ul>
 </li>
-<li><p>InflowBoundaryModel</p>
+<li><code>InflowBoundaryModel</code><ul>
+<li>InflowBoundaryModel.H</li>
+<li>InflowBoundaryModel.C</li>
+<li>InflowBoundaryModelNew.C</li>
+<li>FreeStream.H</li>
+<li>FreeStream.C</li>
+<li>NoInflow.H</li>
+<li>NoInflow.C</li>
+</ul>
 </li>
-<li>WallInteractionModel<ul>
-<li>WallInteractionModel.C</li>
+<li><code>WallInteractionModel</code><ul>
 <li>WallInteractionModel.H</li>
+<li>WallInteractionModel.C</li>
 <li>WallInteractionModelNew.C</li>
+<li>MaxwellianThermal.H</li>
+<li>MaxwellianThermal.C</li>
+<li>MixedDiffuseSpecular.H</li>
+<li>MixedDiffuseSpecular.C</li>
+<li>SpecularReflection.H</li>
+<li>SpecularReflection.C</li>
 </ul>
 </li>
 </ul>
