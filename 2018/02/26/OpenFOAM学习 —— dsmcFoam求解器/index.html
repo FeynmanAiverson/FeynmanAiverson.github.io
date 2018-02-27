@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Shaundinger&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
-<meta property="og:updated_time" content="2018-02-27T18:34:02.592Z">
+<meta property="og:updated_time" content="2018-02-27T18:40:11.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenFOAM学习 —— dsmcFoam求解器">
 <meta name="twitter:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
@@ -411,7 +411,7 @@
 <p>一开始来到这里会让人感到无能为力，OpenFOAM为了维持代码的简介性，使用了大量的继承、派生和模板，而且继承层数之多令人绝望，有的时候为了查到某一个子类的成员函数的定义，要向上找五六层。这时候建议使用<a href="https://cpp.openfoam.org/v5/" target="_blank" rel="noopener">OpenFOAM C++ Source Code Guide</a>进行查找，doxygen生成的代码能够减轻迷茫。</p>
 <p>dsmc求解器的源码位于目录<code>$FOAM_SRC\lagrangian\DSMC</code>下，包括四个文件夹</p>
 <ul>
-<li><code>clouds</code><ul>
+<li><strong><code>clouds</code></strong><ul>
 <li><code>baseClasses</code><ul>
 <li>DSMCBaseCloud.H</li>
 <li>DSMCBaseCloud.C</li>
@@ -429,13 +429,18 @@
 </li>
 </ul>
 </li>
+</ul>
+<hr>
+<ul>
 <li><code>Make</code><ul>
 <li>files</li>
 <li>options</li>
 </ul>
 </li>
-<li><p><code>parcels</code></p>
+</ul>
+<hr>
 <ul>
+<li><code>parcels</code><ul>
 <li><code>derived</code><ul>
 <li>defineDSMCParcel.C</li>
 <li>dsmcParcel.C</li>
@@ -454,8 +459,10 @@
 </li>
 </ul>
 </li>
-<li><p><code>submodels</code> </p>
+</ul>
+<hr>
 <ul>
+<li><code>submodels</code> <ul>
 <li><code>BinaryCollisionModel</code>  <ul>
 <li>BinaryCollisionModel.H</li>
 <li>BinaryCollisionModel.C</li>
@@ -493,6 +500,7 @@
 </ul>
 </li>
 </ul>
+<hr>
 
       
     </div>
