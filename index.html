@@ -536,7 +536,8 @@
 <p>分子数: $2.68\times 10^7$</p>
 <p>初始时刻模拟分子数(dsmc particles): 1600</p>
 <p>初始时刻每个模拟分子代表的分子数: $2.68\times 10^7 / 1600 = 1.68\times 10^3$</p>
-<p>$P_u(u)=4\pi(\frac{m}{2\pi k_B T})^{3/2}u^2e^{-0.5mu^2/k_BT}$</p>
+<p>时间步长设置为$$.<br>对于非定常问题，为了计算稳态，通常采用求系综平均的方法，增加采样数，减少统计误差。对于本问题，$t=5\time 10^{-7}s$后模拟分子数目趋于稳定，因此这里选取时间$t=5\time 10^{-7}s$到$t=1\times 10^{-6}s$的所有样本,</p>
+<p>平衡态速度分布为Maxwell分布：<br>$P_u(u)=4\pi(\frac{m}{2\pi k_B T})^{3/2}u^2e^{-0.5mu^2/k_BT}$</p>
 <p>用户可以对 <code>$FOAM_TUTORIALS</code> 文件目录进行扫描来发现使用函数工具的算例。<br>这可以通过 <code>grep</code> 命令来实现，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find $FOAM_TUTORIALS -name controlDict | xargs grep -l functions</span><br></pre></td></tr></table></figure></p>
 
           
