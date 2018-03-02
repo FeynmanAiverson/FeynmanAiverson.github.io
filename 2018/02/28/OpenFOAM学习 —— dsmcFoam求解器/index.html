@@ -82,11 +82,11 @@
 <meta name="keywords" content="OpenFOAM,dsmcFoam">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenFOAM学习 —— dsmcFoam求解器">
-<meta property="og:url" content="http://yoursite.com/2018/02/26/OpenFOAM学习 —— dsmcFoam求解器/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/02/28/OpenFOAM学习 —— dsmcFoam求解器/index.html">
 <meta property="og:site_name" content="Shaundinger&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
-<meta property="og:updated_time" content="2018-03-02T15:26:22.980Z">
+<meta property="og:updated_time" content="2018-03-02T19:06:58.306Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OpenFOAM学习 —— dsmcFoam求解器">
 <meta name="twitter:image" content="http://yoursite.com/img/dsmcFoam_directory.jpg">
@@ -119,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/26/OpenFOAM学习 —— dsmcFoam求解器/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/28/OpenFOAM学习 —— dsmcFoam求解器/"/>
 
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/26/OpenFOAM学习 —— dsmcFoam求解器/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/28/OpenFOAM学习 —— dsmcFoam求解器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shaundinger">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T19:25:56+08:00">
-                2018-02-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T19:25:56+08:00">
+                2018-02-28
               </time>
             
 
@@ -385,7 +385,8 @@
       
         <p><img src="/img/dsmcFoam_directory.jpg" alt=""></p>
 <a id="more"></a>
-<h3 id="1-先来看看顶层求解器dsmcFoam"><a href="#1-先来看看顶层求解器dsmcFoam" class="headerlink" title="1. 先来看看顶层求解器dsmcFoam"></a>1. 先来看看顶层求解器dsmcFoam</h3><p>得益于C++面向对象的编程理念，OpenFOAM的顶层求解器简单明了，顶层求解器的源文件位于<code>application</code>目录下。里面各个变量的命名方式也非常规范，代表的意思一目了然，可以顺藤摸瓜了解一下OpenFOAM的求解算法。</p>
+<p><strong>1. 先来看看顶层求解器dsmcFoam</strong></p>
+<p>得益于C++面向对象的编程理念，OpenFOAM的顶层求解器简单明了，顶层求解器的源文件位于<code>application</code>目录下。里面各个变量的命名方式也非常规范，代表的意思一目了然，可以顺藤摸瓜了解一下OpenFOAM的求解算法。</p>
 <p>在目录<code>\applications\solvers\discreteMethods\dsmc\dsmcFoam</code>下，包括一个<code>Make</code>文件夹, 和两个源文件<code>CreateFields.H</code>, <code>dsmcFoam.C</code>。 <code>Make</code>文件夹下包含两个文本文件，<code>files</code>和<code>options</code>，内容分别为</p>
 <p><code>files</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dsmcFoam.C</span><br><span class="line"></span><br><span class="line">EXE = $(FOAM_APPBIN)/dsmcFoam</span><br></pre></td></tr></table></figure></p>
 <p><code>options</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">EXE_INC = \</span><br><span class="line">    -I$(LIB_SRC)/finiteVolume/lnInclude \</span><br><span class="line">    -I$(LIB_SRC)/lagrangian/basic/lnInclude \</span><br><span class="line">    -I$(LIB_SRC)/lagrangian/DSMC/lnInclude \</span><br><span class="line">    -I$(LIB_SRC)/meshTools/lnInclude</span><br><span class="line"></span><br><span class="line">EXE_LIBS = \</span><br><span class="line">    -lmeshTools \</span><br><span class="line">    -lfiniteVolume \</span><br><span class="line">    -llagrangian \</span><br><span class="line">    -lDSMC</span><br></pre></td></tr></table></figure></p>
@@ -412,8 +413,9 @@
 <p>接着谈一下这里的runTime, runTime是类Time的一个对象，runTime.timeName()就是当前运行到的物理时间（非稳态物理问题的时间），当程序运行到了5.1s，runTime.timeName()就会返回将字符串“5.1”，OpenFOAM在对不同时刻的数据进行存取的时候就是使用这个字符串。这里还用到了的Time类几个成员函数：<br><code>Time.loop()</code>和<code>Time.write()</code>, 为了搞清楚这两个函数的具体内容，使用文件查找命令<code>find</code>在<code>$FOAM_SRC</code>目录下查找<code>Time.H</code>，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find $FOAM_SRC -name Time.H</span><br></pre></td></tr></table></figure></p>
 <p>发现<code>Time</code>类位于<code>$FOAM_SRC/OpenFOAM/db/Time</code>目录下。下面是头文件<code>Time.H</code>中的一段<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Check</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//- Return true if run should continue,</span></span><br><span class="line">    <span class="comment">//  also invokes the functionObjectList::end() method</span></span><br><span class="line">    <span class="comment">//  when the time goes out of range</span></span><br><span class="line">    <span class="comment">//  \note</span></span><br><span class="line">    <span class="comment">//  For correct behaviour, the following style of time-loop</span></span><br><span class="line">    <span class="comment">//  is recommended:</span></span><br><span class="line">    <span class="comment">//  \code</span></span><br><span class="line">    <span class="comment">//      while (runTime.run())</span></span><br><span class="line">    <span class="comment">//      &#123;</span></span><br><span class="line">    <span class="comment">//          runTime++;</span></span><br><span class="line">    <span class="comment">//          solve;</span></span><br><span class="line">    <span class="comment">//          runTime.write();</span></span><br><span class="line">    <span class="comment">//      &#125;</span></span><br><span class="line">    <span class="comment">//  \endcode</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">run</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//- Return true if run should continue and if so increment time</span></span><br><span class="line">    <span class="comment">//  also invokes the functionObjectList::end() method</span></span><br><span class="line">    <span class="comment">//  when the time goes out of range</span></span><br><span class="line">    <span class="comment">//  \note</span></span><br><span class="line">    <span class="comment">//  For correct behaviour, the following style of time-loop</span></span><br><span class="line">    <span class="comment">//  is recommended:</span></span><br><span class="line">    <span class="comment">//  \code</span></span><br><span class="line">    <span class="comment">//      while (runTime.loop())</span></span><br><span class="line">    <span class="comment">//      &#123;</span></span><br><span class="line">    <span class="comment">//          solve;</span></span><br><span class="line">    <span class="comment">//          runTime.write();</span></span><br><span class="line">    <span class="comment">//      &#125;</span></span><br><span class="line">    <span class="comment">//  \endcode</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">loop</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//- Return true if end of run,</span></span><br><span class="line">    <span class="comment">//  does not invoke any functionObject methods</span></span><br><span class="line">    <span class="comment">//  \note</span></span><br><span class="line">    <span class="comment">//      The rounding heuristics near endTime mean that</span></span><br><span class="line">    <span class="comment">//      \code run() \endcode and \code !end() \endcode may</span></span><br><span class="line">    <span class="comment">//      not yield the same result</span></span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">bool</span> <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span></span>;</span><br></pre></td></tr></table></figure></p>
 <p>可以发现<code>runTime.loop()</code>结合<code>while</code>语句可以用来对时间步循环，同样的功能还可以用<code>for</code>语句来实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (runTime++; !runTime.end(); runTime++)</span><br><span class="line">&#123;</span><br><span class="line">	solve；</span><br><span class="line">    runTime.write();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在<code>Time.H</code>里面没有发现成员函数<code>write()</code>的定义，用<a href="https://cpp.openfoam.org/v5/" target="_blank" rel="noopener">OpenFOAM C++ Source Code Guide</a>进行查找，根据继承关系，发现这里的<code>Time.write()</code>函数继承于<code>regIOobject</code>类的<code>write()</code>虚函数，<code>regIOobject</code>类的源程序位于<code>$FOAM_SRC/OpenFOAM/db/regIOobject</code>下，虚函数<code>write()</code>内容如下<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Foam::regIOobject::write(<span class="keyword">const</span> <span class="keyword">bool</span> valid) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> writeObject</span><br><span class="line">    (</span><br><span class="line">        time().writeFormat(),</span><br><span class="line">        IOstream::currentVersion,</span><br><span class="line">        time().writeCompression(),</span><br><span class="line">        valid</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-再来看看底层的源程序"><a href="#2-再来看看底层的源程序" class="headerlink" title="2. 再来看看底层的源程序"></a>2. 再来看看底层的源程序</h3><p>这一步，我们需要弄懂dsmcFoam的底层实现，也就是<code>src</code>文件夹里的内容，包括了OpenFOAM所有类的声明和定义文件。</p>
+<p>在<code>Time.H</code>里面没有发现成员函数<code>write()</code>的定义，用 <a href="https://cpp.openfoam.org/v5/" target="_blank" rel="noopener">OpenFOAM C++ Source Code Guide</a> 进行查找，根据继承关系，发现这里的<code>Time.write()</code>函数继承于<code>regIOobject</code>类的<code>write()</code>虚函数，<code>regIOobject</code>类的源程序位于<code>$FOAM_SRC/OpenFOAM/db/regIOobject</code>下，虚函数<code>write()</code>内容如下<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Foam::regIOobject::write(<span class="keyword">const</span> <span class="keyword">bool</span> valid) <span class="keyword">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> writeObject</span><br><span class="line">    (</span><br><span class="line">        time().writeFormat(),</span><br><span class="line">        IOstream::currentVersion,</span><br><span class="line">        time().writeCompression(),</span><br><span class="line">        valid</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 再来看看底层的源程序</strong></p>
+<p>这一步，我们需要弄懂dsmcFoam的底层实现，也就是<code>src</code>文件夹里的内容，包括了OpenFOAM所有类的声明和定义文件。</p>
 <p>一开始来到这里会让人感到无能为力，OpenFOAM为了维持代码的简介性，使用了大量的继承、派生和模板，而且继承层数之多令人绝望，有的时候为了查到某一个子类的成员函数的定义，要向上找五六层。这时候建议使用<a href="https://cpp.openfoam.org/v5/" target="_blank" rel="noopener">OpenFOAM C++ Source Code Guide</a>进行查找，doxygen生成的代码能够减轻迷茫。</p>
 <p>dsmc求解器的源码位于目录<code>$FOAM_SRC\lagrangian\DSMC</code>下，包括四个文件夹<strong><code>clouds</code></strong>, <strong><code>Make</code></strong>, <strong><code>parcels</code></strong>, <strong><code>submodels</code></strong></p>
 <hr>
@@ -547,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/26/Cmd Markdown/" rel="next" title="Cmd Markdown 编辑阅读器">
-                <i class="fa fa-chevron-left"></i> Cmd Markdown 编辑阅读器
+              <a href="/2018/02/27/dsmcFoam —— Couette flow/" rel="next" title="dsmcFoam —— Couette flow">
+                <i class="fa fa-chevron-left"></i> dsmcFoam —— Couette flow
               </a>
             
           </div>
@@ -557,8 +559,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/27/dsmcFoam —— Couette flow/" rel="prev" title="dsmcFoam —— Couette flow">
-                dsmcFoam —— Couette flow <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/01/dsmcFoam —— 2D supersonic flow over a flat plate/" rel="prev" title="dsmcFoam —— 2D supersonic flow over a flat plate">
+                dsmcFoam —— 2D supersonic flow over a flat plate <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -611,17 +613,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -695,22 +688,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-先来看看顶层求解器dsmcFoam"><span class="nav-number">1.</span> <span class="nav-text">1. 先来看看顶层求解器dsmcFoam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-再来看看底层的源程序"><span class="nav-number">2.</span> <span class="nav-text">2. 再来看看底层的源程序</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
